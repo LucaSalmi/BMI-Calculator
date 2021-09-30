@@ -4,14 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     TextView yourBodyType;
     int userWeight;
     double userHeight;
+    // isEmpty is used in getTextInput()
     boolean isEmpty = false;
 
     @Override
@@ -42,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getTextInput();
 
-                if(isEmpty == false){
+                if(!isEmpty){
                     calculateBMI(userWeight, userHeight);
                 }
 
@@ -86,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * calculates the bmi value from weight and height
-     * @param weight
-     * @param height
+     * @param weight int value from user
+     * @param height double value from user
      */
     public void calculateBMI(int weight, double height){
         double bmi = weight/Math.pow(height,2);
@@ -96,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * converts result from calculateBMI() in string and shows it to user, then it checks value of bmi and modifies textView to show body type
-     * @param bmi
+     * @param bmi result of calculateBMI()
      */
     public void printResult(double bmi){
         DecimalFormat df = new DecimalFormat("#,00");
