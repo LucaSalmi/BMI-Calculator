@@ -48,7 +48,8 @@
         app:layout_constraintBottom_toTopOf="@+id/edit_text_height"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"></ImageView>
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@color/white"></ImageView>
 
     <TextView
         android:id="@+id/title_text"
@@ -62,17 +63,30 @@
         app:layout_constraintBottom_toTopOf="@drawable/bmi"></TextView>
 
 
-        <TextView
-            android:id="@+id/result_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/placeholder_result"
-            android:textStyle="bold"
-            android:textSize="@dimen/text_size"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/calculate_button"
-            android:layout_marginTop="@dimen/mini_margin"></TextView>
+    <TextView
+        android:id="@+id/result_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/placeholder_result"
+        android:textSize="@dimen/text_size"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calculate_button"></TextView>
+
+    <TextView
+        android:id="@+id/body_type_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/placeholder_body_type"
+        android:textSize="@dimen/text_size"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result_text"
+        ></TextView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

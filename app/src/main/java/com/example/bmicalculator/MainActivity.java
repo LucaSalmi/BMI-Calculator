@@ -19,8 +19,10 @@ public class MainActivity extends AppCompatActivity {
     EditText weight_input;
     EditText height_input;
     TextView yourBmi;
+    TextView yourBodyType;
     int userWeight;
     double userHeight;
+    boolean isEmpty = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +31,21 @@ public class MainActivity extends AppCompatActivity {
 
         Button calculate = findViewById(R.id.calculate_button);
         yourBmi = findViewById(R.id.result_text);
+        yourBodyType = findViewById(R.id.body_type_text);
         weight_input = findViewById(R.id.edit_text_weight);
         height_input = findViewById(R.id.edit_text_height);
+
 
         calculate.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 getTextInput();
-                calculateBMI(userWeight, userHeight);
+
+                if(isEmpty == false){
+                    calculateBMI(userWeight, userHeight);
+                }
+
             }
         });
     }
@@ -50,9 +58,11 @@ public class MainActivity extends AppCompatActivity {
 
         String weightText = weight_input.getText().toString();
         String heightText = height_input.getText().toString();
+
         if(TextUtils.isEmpty(weightText) || TextUtils.isEmpty(heightText)){
             weight_input.setError("Field cannot be empty");
             height_input.setError("Field cannot be empty");
+            isEmpty = true;
             return;
         }
 
@@ -60,13 +70,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * the method converts my två strings in Int and saves them in two variables declared at the start of the program
+     * the method converts my two strings in Int and saves them in two variables declared at the start of the program
      * @param a String weightText
      * @param b String heightText
      */
     public void convertToInt(String a, String b){
         userWeight = Integer.parseInt(a);
         userHeight = Double.parseDouble(b);
+        if (userHeight >= 100){
+            userHeight /= 100;
+        }else if (userHeight >= 10){
+            userHeight /= 10;
+        }
     }
 
     /**
@@ -80,13 +95,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * converts result in string and shows it to user
+     * converts result from calculateBMI() in string and shows it to user, then it checks value of bmi and modifies textView to show body type
      * @param bmi
      */
     public void printResult(double bmi){
         DecimalFormat df = new DecimalFormat("#,00");
         String print = df.format(bmi);
-        yourBmi.setText(print);
+        String bmi_flavour_text = getResources().getString(R.string.bmi_flavour_text);
+        yourBmi.setText(bmi_flavour_text + print);
+        if ( bmi >= 30){
+            yourBodyType.setText(R.string.Obesity);
+        }else if ( bmi >= 25){
+            yourBodyType.setText(R.string.overweight);
+        }else if (bmi >= 18.5){
+            yourBodyType.setText(R.string.normal_weight);
+        }else{
+            yourBodyType.setText(R.string.underweight);
+        }
     }
 
 }
