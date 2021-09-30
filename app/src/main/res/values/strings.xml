@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BMI Calculator</string>
+    <string name="button_text">Calculate</string>
+    <string name="hint_weight">your weight (kg)</string>
+    <string name="hint_height">Your height (m)</string>
+    <string name="title">"Welcome to our famous BMI calculator, recommended by every RESPECTABLE doctor!! "</string>
+    <string name="placeholder_result">Your BMI is...</string>
 </resources>
