@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
                     calculateBMI(userWeight, userHeight);
                 }
 
+                weight_input.getText().clear();
+                height_input.getText().clear();
             }
         });
     }
@@ -56,8 +58,16 @@ public class MainActivity extends AppCompatActivity {
         String weightText = weight_input.getText().toString();
         String heightText = height_input.getText().toString();
 
-        if(TextUtils.isEmpty(weightText) || TextUtils.isEmpty(heightText)){
+        if(TextUtils.isEmpty(weightText) && TextUtils.isEmpty(heightText)){
             weight_input.setError("Field cannot be empty");
+            height_input.setError("Field cannot be empty");
+            isEmpty = true;
+            return;
+        }else if(TextUtils.isEmpty(weightText)){
+            weight_input.setError("Field cannot be empty");
+            isEmpty = true;
+            return;
+        }else if(TextUtils.isEmpty(heightText)){
             height_input.setError("Field cannot be empty");
             isEmpty = true;
             return;
