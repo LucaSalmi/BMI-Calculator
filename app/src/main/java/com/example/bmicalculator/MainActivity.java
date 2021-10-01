@@ -56,6 +56,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * manages instructions when the button or enter on the keyboard are pressed
+     */
+    public void onInput(){
+
+        getTextInput();
+
+        if(!isEmpty){
+            showToast(1);
+            calculateBMI(userWeight, userHeight);
+        }
+
+        weight_input.getText().clear();
+        height_input.getText().clear();
+
+    }
+
+    /**
      * converts and saves in string variables the input from the UI
      * it also checks if the input fields are empty and returns an error if it's the case
      */
@@ -172,20 +189,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * manages instructions when the button or enter on the keyboard are pressed
-      */
-    public void onInput(){
 
-        getTextInput();
-
-        if(!isEmpty){
-            showToast(1);
-            calculateBMI(userWeight, userHeight);
-        }
-
-        weight_input.getText().clear();
-        height_input.getText().clear();
-
-    }
 }
