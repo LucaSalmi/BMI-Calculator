@@ -6,16 +6,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.snackbar.Snackbar;
-
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,15 +42,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
 
-                showToast(1);
-                getTextInput();
-
-                if(!isEmpty){
-                    calculateBMI(userWeight, userHeight);
-                }
-
-                weight_input.getText().clear();
-                height_input.getText().clear();
+                onInput();
                 return false;
             }
         });
@@ -64,15 +52,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                showToast(1);
-                getTextInput();
-
-                if(!isEmpty){
-                    calculateBMI(userWeight, userHeight);
-                }
-
-                weight_input.getText().clear();
-                height_input.getText().clear();
+                onInput();
             }
         });
     }
@@ -111,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
     public void convertToInt(String a, String b){
         userWeight = Integer.parseInt(a);
         userHeight = Double.parseDouble(b);
+
         if (userHeight >= 100){
             userHeight /= 100;
         }else if (userHeight >= 10){
@@ -133,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
      * @param bmi result of calculateBMI()
      */
     public void printResult(double bmi){
-        DecimalFormat df = new DecimalFormat("#,00");
+        DecimalFormat df = new DecimalFormat("#.00");
         String print = df.format(bmi);
         String bmi_flavour_text = getResources().getString(R.string.bmi_flavour_text);
         pause(ms);
@@ -166,16 +147,16 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,R.string.floating_message,Toast.LENGTH_SHORT).show();
                 break;
             case 2:
-                weight_input.setError("");
-                height_input.setError("");
+                weight_input.setError("Error");
+                height_input.setError("Error");
                 Toast.makeText(MainActivity.this,R.string.both_fields_empty,Toast.LENGTH_SHORT).show();
                 break;
             case 3:
-                weight_input.setError("");
+                weight_input.setError("Error");
                 Toast.makeText(MainActivity.this,R.string.weight_field_empty,Toast.LENGTH_SHORT).show();
                 break;
             case 4:
-                height_input.setError("");
+                height_input.setError("Error");
                 Toast.makeText(MainActivity.this,R.string.height_field_empty,Toast.LENGTH_SHORT).show();
                 break;
         }
@@ -193,4 +174,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * manages instructions when the button or enter on the keyboard are pressed
+      */
+    public void onInput(){
+
+        getTextInput();
+
+        if(!isEmpty){
+            showToast(1);
+            calculateBMI(userWeight, userHeight);
+        }
+
+        weight_input.getText().clear();
+        height_input.getText().clear();
+
+    }
 }
