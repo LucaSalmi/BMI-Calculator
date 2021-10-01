@@ -2,8 +2,6 @@ package com.example.bmicalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -120,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         pause(ms);
         yourBmi.setText(bmi_flavour_text + print);
         if ( bmi >= 30){
-            yourBodyType.setText(R.string.Obesity);
+            yourBodyType.setText(R.string.obesity);
         }else if ( bmi >= 25){
             yourBodyType.setText(R.string.overweight);
         }else if (bmi >= 18.5){

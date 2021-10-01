@@ -8,7 +8,7 @@
     <string name="underweight">You are underweight</string>
     <string name="normal_weight">You are at normal weight</string>
     <string name="overweight">You are overweight</string>
-    <string name="Obesity">You are obese</string>
+    <string name="obesity">You are obese</string>
     <string name="placeholder_body_type">Your body type is...</string>
     <string name="bmi_flavour_text">"Your BMI is: "</string>
     <string name="floating_message">Calculating...</string>
