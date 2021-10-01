@@ -11,4 +11,5 @@
     <string name="Obesity">You are obese</string>
     <string name="placeholder_body_type">Your body type is...</string>
     <string name="bmi_flavour_text">"Your BMI is: "</string>
+    <string name="floating_message">Calculating...</string>
 </resources>

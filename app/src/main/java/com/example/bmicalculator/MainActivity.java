@@ -2,20 +2,27 @@ package com.example.bmicalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
+
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
-
     EditText weight_input;
     EditText height_input;
     TextView yourBmi;
     TextView yourBodyType;
+    //final values for calculation
     int userWeight;
     double userHeight;
     // isEmpty is used in getTextInput()
@@ -32,11 +39,30 @@ public class MainActivity extends AppCompatActivity {
         weight_input = findViewById(R.id.edit_text_weight);
         height_input = findViewById(R.id.edit_text_height);
 
+        weight_input.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+
+                Toast.makeText(MainActivity.this,R.string.floating_message,Toast.LENGTH_SHORT).show();
+                getTextInput();
+
+                if(!isEmpty){
+                    calculateBMI(userWeight, userHeight);
+                }
+
+                weight_input.getText().clear();
+                height_input.getText().clear();
+                return false;
+            }
+        });
 
         calculate.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+
+                Toast.makeText(MainActivity.this,R.string.floating_message,Toast.LENGTH_SHORT).show();
                 getTextInput();
 
                 if(!isEmpty){
@@ -120,5 +146,4 @@ public class MainActivity extends AppCompatActivity {
             yourBodyType.setText(R.string.underweight);
         }
     }
-
 }
