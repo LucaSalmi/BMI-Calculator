@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     EditText height_input;
     TextView yourBmi;
     TextView yourBodyType;
+    int ms = 500;
     //final values for calculation
     int userWeight;
     double userHeight;
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
 
-                Toast.makeText(MainActivity.this,R.string.floating_message,Toast.LENGTH_SHORT).show();
+                showToast(1);
                 getTextInput();
 
                 if(!isEmpty){
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(MainActivity.this,R.string.floating_message,Toast.LENGTH_SHORT).show();
+                showToast(1);
                 getTextInput();
 
                 if(!isEmpty){
@@ -85,16 +87,15 @@ public class MainActivity extends AppCompatActivity {
         String heightText = height_input.getText().toString();
 
         if(TextUtils.isEmpty(weightText) && TextUtils.isEmpty(heightText)){
-            weight_input.setError("Field cannot be empty");
-            height_input.setError("Field cannot be empty");
+            showToast(2);
             isEmpty = true;
             return;
         }else if(TextUtils.isEmpty(weightText)){
-            weight_input.setError("Field cannot be empty");
+            showToast(3);
             isEmpty = true;
             return;
         }else if(TextUtils.isEmpty(heightText)){
-            height_input.setError("Field cannot be empty");
+            showToast(4);
             isEmpty = true;
             return;
         }
@@ -135,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
         DecimalFormat df = new DecimalFormat("#,00");
         String print = df.format(bmi);
         String bmi_flavour_text = getResources().getString(R.string.bmi_flavour_text);
+        pause(ms);
         yourBmi.setText(bmi_flavour_text + print);
         if ( bmi >= 30){
             yourBodyType.setText(R.string.Obesity);
@@ -146,4 +148,49 @@ public class MainActivity extends AppCompatActivity {
             yourBodyType.setText(R.string.underweight);
         }
     }
+
+    /**
+     * shows the user a toast message after pressing enter or the button.
+     * displays a toast and error message if EnterText is empty
+     * @param id used to identify what to show
+     *           id 1 is after pressing button and entering values
+     *           id 2 is if both EnterText are empty
+     *           id 3 is if weight EnterText is empty
+     *           id 4 is if height EnterText is empty
+     */
+    public void showToast(int id){
+
+        switch (id){
+
+            case 1:
+                Toast.makeText(MainActivity.this,R.string.floating_message,Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+                weight_input.setError("");
+                height_input.setError("");
+                Toast.makeText(MainActivity.this,R.string.both_fields_empty,Toast.LENGTH_SHORT).show();
+                break;
+            case 3:
+                weight_input.setError("");
+                Toast.makeText(MainActivity.this,R.string.weight_field_empty,Toast.LENGTH_SHORT).show();
+                break;
+            case 4:
+                height_input.setError("");
+                Toast.makeText(MainActivity.this,R.string.height_field_empty,Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+    /**
+     * pauses the program for a set amount of milliseconds ( it slows down showing the output to make it seem more "professional") ;)
+     * @param ms defined at the start as int ms = 500
+     */
+    public void pause(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            System.err.format("IOException: %s%n", e);
+        }
+    }
+
 }

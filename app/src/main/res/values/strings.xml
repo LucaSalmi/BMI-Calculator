@@ -12,4 +12,7 @@
     <string name="placeholder_body_type">Your body type is...</string>
     <string name="bmi_flavour_text">"Your BMI is: "</string>
     <string name="floating_message">Calculating...</string>
+    <string name="both_fields_empty">The fields cannot be empty</string>
+    <string name="height_field_empty">The height field cannot be empty</string>
+    <string name="weight_field_empty">The weight field cannot be empty</string>
 </resources>
