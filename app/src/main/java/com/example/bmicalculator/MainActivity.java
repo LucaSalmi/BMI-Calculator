@@ -2,38 +2,48 @@ package com.example.bmicalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     EditText weight_input;
     EditText height_input;
     TextView yourBmi;
     TextView yourBodyType;
+    ListView oldResults;
     int ms = 500;
     //final values for calculation
     int userWeight;
     double userHeight;
     // isEmpty is used in getTextInput()
     boolean isEmpty = false;
+    String[] results = new String[30];
+    int arrayPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         Button calculate = findViewById(R.id.calculate_button);
         yourBmi = findViewById(R.id.result_text);
         yourBodyType = findViewById(R.id.body_type_text);
         weight_input = findViewById(R.id.edit_text_weight);
         height_input = findViewById(R.id.edit_text_height);
+
 
         weight_input.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
@@ -53,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
                 onInput();
             }
         });
+
+
     }
 
     /**
@@ -69,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         weight_input.getText().clear();
         height_input.getText().clear();
+
 
     }
 
@@ -143,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         }else{
             yourBodyType.setText(R.string.underweight);
         }
+
     }
 
     /**
